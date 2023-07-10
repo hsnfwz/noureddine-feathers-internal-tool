@@ -7,11 +7,6 @@
   import Heading from '$components/Heading/Heading.svelte';
 </script>
 
-<svelte:head>
-  <title>Sign Out | Noureddine Feathers</title>
-  <meta name="description" content="Sign In | Noureddine Feathers - Shop premium ostrich feather dusters, premium extendable lambswool dusters, premium lambswool dusters, ostrich feathers, and ostrich eggshells - handmade from 100% natural farm-raised ostrich feathers and eggshells" />
-</svelte:head>
-
 <div class="flex flex-col items-center gap-4">
   <Heading>
     <span>Sign Out</span>
