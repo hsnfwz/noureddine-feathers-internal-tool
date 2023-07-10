@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { page } from '$app/stores';
+
   // components
   import Heading from '$components/Heading/Heading.svelte';
 
@@ -7,7 +9,6 @@
 
   // stores
   import { profile } from '$stores/ProfileStore';
-  import { page } from '$app/stores';
 
   // api
   import { updateOrder } from '$api/order';
@@ -24,10 +25,9 @@
   let isLoading: boolean = true;
   let order: any;
   let orderProducts: any;
-  let currentProfile: I_Profile | undefined = undefined;
   let trackingId: string = '';
 
-  profile.subscribe(async (value) => {
+  page.subscribe(async (value) => {
     isLoading = true;
 
     if (value && value.is_admin) {
@@ -37,8 +37,6 @@
       order = _orders[0];
       orderProducts = [..._orderProducts];
     }
-
-    currentProfile = value;
 
     isLoading = false;
   });
@@ -59,7 +57,7 @@
 </Heading>
 {#if isLoading}
   <p class="text-center">Loading...</p>
-{:else if !isLoading && currentProfile && currentProfile.is_admin && order && orderProducts}
+{:else if !isLoading && $page.data.profile && $page.data.profile.is_admin && order && orderProducts}
   <div class="flex flex-col gap-8 m-auto">
     <div class="flex flex-col gap-4">
       <div>

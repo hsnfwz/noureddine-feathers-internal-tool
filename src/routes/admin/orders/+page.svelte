@@ -1,12 +1,8 @@
 <script lang="ts">
+  import { page } from '$app/stores';
+
   // components
   import Heading from '$components/Heading/Heading.svelte';
-
-  // interfaces
-  import type I_Profile from '$interfaces/I_Profile';
-
-  // stores
-  import { profile } from '$stores/ProfileStore';
 
   // supabase
   import supabase from '$config/supabase';
@@ -16,11 +12,10 @@
 
   // state
   let isLoading: boolean = true;
-  let currentProfile: I_Profile | undefined = undefined;
   let fulfilledOrders: any;
   let unfulfilledOrders: any;
 
-  profile.subscribe(async (value) => {
+  page.subscribe(async (value) => {
     isLoading = true;
 
     if (value && value.is_admin) {
@@ -45,8 +40,6 @@
         unfulfilledOrders = [..._unfulfilledOrders];
       }
     }
-
-    currentProfile = value;
 
     isLoading = false;
   });
@@ -75,17 +68,12 @@
   .subscribe()
 </script>
 
-<svelte:head>
-  <title>Admin Orders | Noureddine Feathers</title>
-  <meta name="description" content="Noureddine Feathers - Shop premium ostrich feather dusters, premium extendable lambswool dusters, premium lambswool dusters, ostrich feathers, and ostrich eggshells - handmade from 100% natural farm-raised ostrich feathers and eggshells" />
-</svelte:head>
-
 <Heading customClass="text-center">
   <span>Admin - Orders</span>
 </Heading>
 {#if isLoading}
   <p class="text-center">Loading...</p>
-{:else if !isLoading && currentProfile && currentProfile.is_admin && fulfilledOrders && unfulfilledOrders}
+{:else if !isLoading && $page.data.profile && $page.data.profile.is_admin && fulfilledOrders && unfulfilledOrders}
   <div class="flex flex-col gap-8 m-auto">
     <div class="flex flex-col gap-4">
       <h1>New Orders ({unfulfilledOrders.length})</h1>
