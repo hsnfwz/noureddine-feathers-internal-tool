@@ -1,13 +1,5 @@
-import { redirect } from '@sveltejs/kit';
-
-import { getProfileById } from '$api/profile.js';
-
+// To make the session available across the UI, including pages and layouts, it is crucial to pass the session as a parameter in the root layout's server load function.
 export async function load({ locals: { getSession } }) {
   const session = await getSession();
-
-  // if (!session) throw redirect(307, '/auth/sign-in');
-
-  // const profile = await getProfileById(session.user.id);
-
-  return { session, profile: undefined };
+  return { session };
 }
