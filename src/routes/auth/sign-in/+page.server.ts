@@ -18,7 +18,6 @@ export const actions = {
       email,
       options: {
         emailRedirectTo: `${url.origin}/auth/callback`,
-        // emailRedirectTo: 'http://localhost:5174/auth/callback',
       },
     })
 

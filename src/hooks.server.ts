@@ -1,7 +1,5 @@
-// src/hooks.server.js
 import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public';
 import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
-// import { redirect } from '@sveltejs/kit';
 
 export const handle = async ({ event, resolve }) => {
   event.locals.supabase = createSupabaseServerClient({
@@ -10,23 +8,12 @@ export const handle = async ({ event, resolve }) => {
     event,
   });
 
-  /**
-   * a little helper that is written for convenience so that instead
-   * of calling `const { data: { session } } = await supabase.auth.getSession()`
-   * you just call this `await getSession()`
-   */
   event.locals.getSession = async () => {
     const {
       data: { session },
     } = await event.locals.supabase.auth.getSession();
     return session;
   }
-
-  // // protected routes
-  // if (event.url.pathname.startsWith('/')) {
-  //   const session = await event.locals.getSession();
-  //   if (!session) throw redirect(303, '/auth/sign-in');
-  // }
 
   return resolve(event, {
     filterSerializedResponseHeaders(name) {
