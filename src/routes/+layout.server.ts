@@ -5,9 +5,9 @@ import { getProfileById } from '$api/profile.js';
 export async function load({ locals: { getSession } }) {
   const session = await getSession();
 
-  if (!session) throw redirect(303, '/auth/sign-in');
+  // if (!session) throw redirect(307, '/auth/sign-in');
 
-  const profile = await getProfileById(session.user.id);
+  // const profile = await getProfileById(session.user.id);
 
-  return { session, profile };
+  return { session, profile: undefined };
 }
