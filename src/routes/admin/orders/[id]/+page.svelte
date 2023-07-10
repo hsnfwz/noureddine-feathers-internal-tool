@@ -4,12 +4,6 @@
   // components
   import Heading from '$components/Heading/Heading.svelte';
 
-  // interfaces
-  import type I_Profile from '$interfaces/I_Profile';
-
-  // stores
-  import { profile } from '$stores/ProfileStore';
-
   // api
   import { updateOrder } from '$api/order';
   import { getOrders } from '$api/order';
